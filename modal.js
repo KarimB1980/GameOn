@@ -43,6 +43,7 @@ function controleFormulaire() {
   document.getElementById('first').onchange = function () {
     const firstName = document.getElementById('first').value;
     if (/^[a-zA-Z \-]{2,100}$/.test(firstName)) {
+      document.querySelector("#firstMessageErreur").innerHTML = "";
       return true;
     } else {
       document.getElementById('first').value = "";
@@ -54,6 +55,7 @@ function controleFormulaire() {
   document.getElementById('last').onchange = function () {
     const lastName = document.getElementById('last').value;
     if (/^[a-zA-Z \-]{2,100}$/.test(lastName)) {
+      document.querySelector("#lastMessageErreur").innerHTML = "";
       return true;
     } else {
       document.getElementById('last').value = "";
@@ -65,6 +67,7 @@ function controleFormulaire() {
   document.getElementById('email').onchange = function () {
     const Email = document.getElementById('email').value;
     if (/^[\w\.]+@([\w]+\.)+[\w]{2,4}$/.test(Email)) {
+      document.querySelector("#emailMessageErreur").innerHTML = "";
       return true;
     } else {
       document.getElementById('email').value = "";
@@ -76,6 +79,7 @@ function controleFormulaire() {
   document.getElementById('birthdate').onchange = function () {
     const dateNaissance = document.getElementById('birthdate').value;
     if (/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/.test(Email)) {
+      document.querySelector("#naissanceMessageErreur").innerHTML = "";
       return true;
     } else {
       document.getElementById('birthdate').value = "";
@@ -87,6 +91,7 @@ function controleFormulaire() {
   document.getElementById('quantity').onchange = function () {
     const nombreTournois = document.getElementById('quantity').value;
     if (/^[1-9]{0,1}[0-9]$/.test(nombreTournois)) {
+      document.querySelector("#nombretournoisMessageErreur").innerHTML = "";
       return true;
     } else {
       document.getElementById('quantity').value = "";
