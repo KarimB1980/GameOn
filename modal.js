@@ -24,10 +24,10 @@ function launchModal() {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 // Fermeture du formulaire avec un clic sur la croix 
 // Recherche de la croix dans le DOM
-const modalCroix = document.querySelectorAll(".close");
+const modalCroix = document.querySelector(".close");
 
 // Lancement de l'évènement au clic sur la croix
-modalCroix.forEach((btn) => btn.addEventListener("click", fermetureModal));
+modalCroix.addEventListener("click", fermetureModal);
 
 // Fonction fermeture du formulaire
 function fermetureModal() {
@@ -39,25 +39,25 @@ function fermetureModal() {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 // Contrôle des valeurs saisies dans les champs prénom, nom, E-mail, date de naissance, nombre de tournois via regex
 function controleFormulaire() {
-  // Contrôle du champ "Prénom" en vérifiant qu'il ne comporte que des minuscules, majuscules, tirets et 2 à 100 caractères
+  // Contrôle du champ "Prénom" en vérifiant qu'il ne comporte que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères
   document.getElementById('first').onchange = function () {
     const firstName = document.getElementById('first').value;
-    if (/^[a-zA-Z\-]{2,100}$/.test(firstName)) {
+    if (/^[a-zA-Z \-]{2,100}$/.test(firstName)) {
       return true;
     } else {
       document.getElementById('first').value = "";
-      document.querySelector("#firstMessageErreur").innerHTML = "Veuillez renseigner un prénom valide (ne comportant que des minuscules, majuscules, tirets et 2 à 100 caractères maximum).";
+      document.querySelector("#firstMessageErreur").innerHTML = "Veuillez renseigner un prénom valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
     }
   }
 
-  // Contrôle du champ "Nom"
+  // Contrôle du champ "Nom" en vérifiant qu'il ne comporte que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères
   document.getElementById('last').onchange = function () {
     const lastName = document.getElementById('last').value;
-    if (/^[a-zA-Z\-]{2,100}$/.test(lastName)) {
+    if (/^[a-zA-Z \-]{2,100}$/.test(lastName)) {
       return true;
     } else {
       document.getElementById('last').value = "";
-      document.querySelector("#lastMessageErreur").innerHTML = "Veuillez renseigner un nom valide (ne comportant que des minuscules, majuscules, tirets et 2 à 100 caractères maximum).";
+      document.querySelector("#lastMessageErreur").innerHTML = "Veuillez renseigner un nom valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
     }
   }
 
