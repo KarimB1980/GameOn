@@ -154,7 +154,7 @@ function initialisation() {
         document.getElementById('checkbox1').checked = true;
       }
 
-      // Injection de l'état de la case des conditions d'utilisation dans le DOM
+      // Injection de l'état de la case prochains évènements dans le DOM
       if (formulaireDansLocalstorage[0].ProchainsEvenements == true) {
         document.getElementById('checkbox2').checked = true;
       }    
@@ -463,45 +463,37 @@ function initialisation() {
 
     if (firstName!= "" && lastName != "" && Email != "" && dateNaissance != "" && nombreTournois != "" && valeur != "" && conditionsUtilisation.checked) {
     
-    // Création du nouveau content de la class ".content" pour afficher le message de confirmation d'inscription 
-    let merciPourVotreInscription = '';
+      // Création du nouveau content de la class ".content" pour afficher le message de confirmation d'inscription 
+      let merciPourVotreInscription = '';
 
-    merciPourVotreInscription += `<span class="fermerCroix"></span>`
-    merciPourVotreInscription += `<div class="modal-body">`
-    merciPourVotreInscription += `<div class="merciInscription">`
-    merciPourVotreInscription += `<h2>Merci pour</h2>`
-    merciPourVotreInscription += `<h2>votre inscription</h2>`
-    merciPourVotreInscription += `</div>`
-    merciPourVotreInscription += `<input type="submit" class="fermer" value="Fermer">`
-    merciPourVotreInscription += `</div>`
+      merciPourVotreInscription += `<span class="fermerCroix"></span>`
+      merciPourVotreInscription += `<div class="modal-body">`
+      merciPourVotreInscription += `<div class="merciInscription">`
+      merciPourVotreInscription += `<h2>Merci pour</h2>`
+      merciPourVotreInscription += `<h2>votre inscription</h2>`
+      merciPourVotreInscription += `</div>`
+      merciPourVotreInscription += `<input type="submit" class="fermer" value="Fermer">`
+      merciPourVotreInscription += `</div>`
 
-    // Injection du nouveau code html dans le DOM
-    document.querySelector('.content').innerHTML = merciPourVotreInscription;
+      // Injection du nouveau code html dans le DOM
+      document.querySelector('.content').innerHTML = merciPourVotreInscription;
 
-    const modalFermer = document.querySelector(".fermer");
-    const modalFermerCroix = document.querySelector(".fermerCroix");
+      const modalFermer = document.querySelector(".fermer");
+      const modalFermerCroix = document.querySelector(".fermerCroix");
 
-    // Lancement de l'évènement au clic sur le bouton "Fermer"
-    modalFermer.addEventListener("click", fermetureConfirmation);
+      // Lancement de l'évènement au clic sur le bouton "Fermer"
+      modalFermer.addEventListener("click", fermetureConfirmation);
 
-    // Fonction fermeture du message de confirmation
-    function fermetureConfirmation() {
-      // Masquage du formulaire
-      modalbg.style.display = "none";
-      // Réinitialisation du formulaire
-      initialisation()
-    }
+      // Lancement de l'évènement au clic sur la croix"
+      modalFermerCroix.addEventListener("click", fermetureConfirmation);
 
-    // Lancement de l'évènement au clic sur la croix"
-    modalFermerCroix.addEventListener("click", fermetureCroixConfirmation);
-
-    // Fonction fermeture du message de confirmation
-    function fermetureCroixConfirmation() {
-      // Masquage du formulaire
-      modalbg.style.display = "none";
-      // Réinitialisation du formulaire
-      initialisation()
-    }
+      // Fonction fermeture du message de confirmation
+      function fermetureConfirmation() {
+        // Masquage du formulaire
+        modalbg.style.display = "none";
+        // Réinitialisation du formulaire
+        initialisation()
+      }
 
       localStorage.removeItem("formulaire");
     }
