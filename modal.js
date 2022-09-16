@@ -7,39 +7,50 @@ function editNav() {
   }
 }
 
+// Fonction générale d'initialisation du formulaire
 function initialisation() {
-// Création du formulaire
+
+  // Création du formulaire
   function creationFormulaire() {
 
-    let FormulaireDansLocalstorage = JSON.parse(localStorage.getItem("formulaire"));
+    // Conversion du localstorage "formulaire" en objet javascript
+    let formulaireDansLocalstorage = JSON.parse(localStorage.getItem("formulaire"));
 
+    // Si le localstorage n'existe pas alors on crée un tableau "formulaireDansLocalstorage" dans lequel on injecte les valeurs de "valeursFormulaire"
     if (localStorage.getItem("formulaire") == null) {
 
-    let formulaireDansLocalstorage = [];
-    let valeursFormulaire = {
-      Prenom: '',
-      Nom: '',
-      Email: '',
-      DateDeNaissance: '',
-      NombreDeTournois: '',
-      Tournoi: '',
-      ConditionsUtilisation: '',
-      ProchainsEvenements: ''
-    }
-    formulaireDansLocalstorage.push(valeursFormulaire);
-    localStorage.setItem("formulaire", JSON.stringify(formulaireDansLocalstorage));
+      // Création d'un tableau
+      let formulaireDansLocalstorage = [];
+      // Création des valeurs du tableau
+      let valeursFormulaire = {
+        Prenom: '',
+        Nom: '',
+        Email: '',
+        DateDeNaissance: '',
+        NombreDeTournois: '',
+        Tournoi: '',
+        ConditionsUtilisation: '',
+        ProchainsEvenements: ''
+      }
+      // Injection des valeurs dans le tableau
+      formulaireDansLocalstorage.push(valeursFormulaire);
+      // Injection du tableau dans le localstorage avec la clé "formulaire"
+      localStorage.setItem("formulaire", JSON.stringify(formulaireDansLocalstorage));
 
-    formulairehtmlSansVariables()
+      formulairehtml()
     }
 
+    // Si le localstorage existe alors on crée le formulaire puis on injecte les valeurs présentes dans le localstorage dans le formulaire 
     else if (localStorage.getItem("formulaire") != null) {
 
-      donneesFormulaire = localStorage.getItem("formulaire")
-
-      formulairehtmlAvecVariables()
+      // Création du formulaire
+      formulairehtml()
+      // Injection des valeurs présentes dans le localstorage
+      variablesFormulairehtml()
     }
 
-    function formulairehtmlSansVariables() {
+    // Fonction création du formulaire
+    function formulairehtml() {
       let formulairehtml = '';
 
       formulairehtml += `<div class="content">`;
@@ -96,104 +107,55 @@ function initialisation() {
       formulairehtml += `<input class="btn-submit" type="submit" value="C'est parti"/>`;
       formulairehtml += `</div>`;
 
-        // Injection du nouveau code html dans le DOM
+      // Injection du nouveau code html dans le DOM
       document.querySelector('.bground').innerHTML = formulairehtml;
     }
 
-    function formulairehtmlAvecVariables() {
-      let formulairehtml = '';
+    // Fonction modification du formulaire avec les valeurs présentes dans le localstorage
+    function variablesFormulairehtml() {
 
-      formulairehtml += `<div class="content">`;
-      formulairehtml += `<span class="close"></span>`;
-      formulairehtml += `<div class="modal-body">`;
-      formulairehtml += `<div class="formData">`;
-      formulairehtml += `<label for="first">Prénom</label><br>`;
-      formulairehtml += `<input class="text-control" type="text" id="first" name="first" minlength="2" value="${FormulaireDansLocalstorage[0].Prenom}" required /><br>`;
-      formulairehtml += `<p id="firstMessageErreur"></p>`;
-      formulairehtml += `</div>`;
-      formulairehtml += `<div class="formData">`;
-      formulairehtml += `<label for="last">Nom</label><br>`;
-      formulairehtml += `<input class="text-control" type="text" id="last" name="last" minlength="2" value="${FormulaireDansLocalstorage[0].Nom}" required="required" /><br>`;
-      formulairehtml += `<p id="lastMessageErreur"></p>`;
-      formulairehtml += `</div>`;
-      formulairehtml += `<div class="formData">`;
-      formulairehtml += `<label for="email">E-mail</label><br>`;
-      formulairehtml += `<input class="text-control" type="email" id="email" name="email" value="${FormulaireDansLocalstorage[0].Email}" required="required" /><br>`;
-      formulairehtml += `<p id="emailMessageErreur"></p>`;
-      formulairehtml += `</div>`;
-      formulairehtml += `<div class="formData">`;
-      formulairehtml += `<label for="birthdate">Date de naissance</label><br>`;
-      formulairehtml += `<input class="text-control" id="birthdate" name="birthdate" value="${FormulaireDansLocalstorage[0].DateDeNaissance}" required="required" /><br>`;
-      formulairehtml += `<p id="naissanceMessageErreur"></p>`;
-      formulairehtml += `</div>`;
-      formulairehtml += `<div class="formData">`;
-      formulairehtml += `<label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>`;
-      formulairehtml += `<input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" value="${FormulaireDansLocalstorage[0].NombreDeTournois}" required="required">`;
-      formulairehtml += `</div>`;
-      formulairehtml += `<p id="nombretournoisMessageErreur"></p>`;
-      formulairehtml += `<p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>`;
-      formulairehtml += `<div class="formData">`;
-      formulairehtml += `<input class="checkbox-input" type="radio" id="location1" name="location" value="New York"/>`;
-      formulairehtml += `<label class="checkbox-label" for="location1"><span class="checkbox-icon"></span>New York</label>`;
-      formulairehtml += `<input class="checkbox-input" type="radio" id="location2" name="location" value="San Francisco"/>`;
-      formulairehtml += `<label class="checkbox-label" for="location2"><span class="checkbox-icon"></span>San Francisco</label>`;
-      formulairehtml += `<input class="checkbox-input" type="radio" id="location3" name="location" value="Seattle"/>`;
-      formulairehtml += `<label class="checkbox-label" for="location3"><span class="checkbox-icon"></span>Seattle</label>`;
-      formulairehtml += `<input class="checkbox-input" type="radio" id="location4" name="location" value="Chicago"/>`;
-      formulairehtml += `<label class="checkbox-label" for="location4"><span class="checkbox-icon"></span>Chicago</label>`;
-      formulairehtml += `<input class="checkbox-input" type="radio" id="location5" name="location" value="Boston"/>`;
-      formulairehtml += `<label class="checkbox-label" for="location5"><span class="checkbox-icon"></span>Boston</label>`;
-      formulairehtml += `<input class="checkbox-input" type="radio" id="location6" name="location" value="Portland"/>`;
-      formulairehtml += `<label class="checkbox-label" for="location6"><span class="checkbox-icon"></span>Portland</label>`;
-      formulairehtml += `<p id="tournoisMessageErreur"></p>`;
-      formulairehtml += `</div>`;
-      formulairehtml += `<div class="formData">`;
-      formulairehtml += `<input class="checkbox-input" type="checkbox" id="checkbox1" required="required"/>`;
-      formulairehtml += `<label class="checkbox2-label" for="checkbox1"><span class="checkbox-icon"></span>J'ai lu et accepté les conditions d'utilisation.</label><br>`;
-      formulairehtml += `<input class="checkbox-input" type="checkbox" id="checkbox2"/>`;
-      formulairehtml += `<label class="checkbox2-label" for="checkbox2"><span class="checkbox-icon"></span>Je souhaite être prévenu des prochains évènements.</label>`;
-      formulairehtml += `<p id="conditionsMessageErreur"></p>`;
-      formulairehtml += `</div>`;
-      formulairehtml += `<input class="btn-submit" type="submit" value="C'est parti"/>`;
-      formulairehtml += `</div>`;
+      var prenomhtml = document.getElementById("first");
+      prenomhtml.setAttribute("value", `${formulaireDansLocalstorage[0].Prenom}`);
 
-        // Injection du nouveau code html dans le DOM
-      document.querySelector('.bground').innerHTML = formulairehtml;
+      var nomhtml = document.getElementById("last");
+      nomhtml.setAttribute("value", `${formulaireDansLocalstorage[0].Nom}`);
+
+      var emailhtml = document.getElementById("email");
+      emailhtml.setAttribute("value", `${formulaireDansLocalstorage[0].Email}`);
+
+      var dateNaissancehtml = document.getElementById("birthdate");
+      dateNaissancehtml.setAttribute("value", `${formulaireDansLocalstorage[0].DateDeNaissance}`);
+
+      var nombreTournoishtml = document.getElementById("quantity");
+      nombreTournoishtml.setAttribute("value", `${formulaireDansLocalstorage[0].NombreDeTournois}`);
 
       // Injection du tournoi précédemment sélectionné dans le DOM
-      if (FormulaireDansLocalstorage[0].Tournoi == "New York") {
+      if (formulaireDansLocalstorage[0].Tournoi == "New York") {
         document.getElementById('location1').checked = true;
-        document.querySelector("#tournoisMessageErreur").innerHTML = "";
       }
-      if (FormulaireDansLocalstorage[0].Tournoi == "San Francisco") {
+      if (formulaireDansLocalstorage[0].Tournoi == "San Francisco") {
         document.getElementById('location2').checked = true;
-        document.querySelector("#tournoisMessageErreur").innerHTML = "";
       }
-      if (FormulaireDansLocalstorage[0].Tournoi == "Seattle") {
+      if (formulaireDansLocalstorage[0].Tournoi == "Seattle") {
         document.getElementById('location3').checked = true;
-        document.querySelector("#tournoisMessageErreur").innerHTML = "";
       }
-      if (FormulaireDansLocalstorage[0].Tournoi == "Chicago") {
+      if (formulaireDansLocalstorage[0].Tournoi == "Chicago") {
         document.getElementById('location4').checked = true;
-        document.querySelector("#tournoisMessageErreur").innerHTML = "";
       }
-      if (FormulaireDansLocalstorage[0].Tournoi == "Boston") {
+      if (formulaireDansLocalstorage[0].Tournoi == "Boston") {
         document.getElementById('location5').checked = true;
-        document.querySelector("#tournoisMessageErreur").innerHTML = "";
       }
-      if (FormulaireDansLocalstorage[0].Tournoi == "Portland") {
+      if (formulaireDansLocalstorage[0].Tournoi == "Portland") {
         document.getElementById('location6').checked = true;
-        document.querySelector("#tournoisMessageErreur").innerHTML = "";
       }
 
       // Injection de l'état de la case des conditions d'utilisation dans le DOM
-      if (FormulaireDansLocalstorage[0].ConditionsUtilisation == true) {
+      if (formulaireDansLocalstorage[0].ConditionsUtilisation == true) {
         document.getElementById('checkbox1').checked = true;
-        document.querySelector("#conditionsMessageErreur").innerHTML = "";
       }
 
       // Injection de l'état de la case des conditions d'utilisation dans le DOM
-      if (FormulaireDansLocalstorage[0].ProchainsEvenements == true) {
+      if (formulaireDansLocalstorage[0].ProchainsEvenements == true) {
         document.getElementById('checkbox2').checked = true;
       }    
     }
@@ -373,18 +335,20 @@ function initialisation() {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-    // Contrôle si un tournoi a été sélectionné avant un clic sur le bouton "C'est parti"
+    // Contrôle si un tournoi a été sélectionné à l'ouverture du formulaire
     var radios = document.getElementsByName('location');
     for(var i = 0; i < radios.length; i++){
+      // Si un tournoi est déjà sélectionné on masque le message d'erreur
       if(radios[i].checked){
       valeur = radios[i].value;
       document.querySelector("#tournoisMessageErreur").innerHTML = "";
+      // Si aucun tournoi n'a été sélectionné on affiche le message d'erreur ci-dessous
       }else if(valeur == "") {
         document.querySelector("#tournoisMessageErreur").innerHTML = "Veuillez sélectionner un tournoi parmis ceux proposés ci-dessus.";
       }
     }
 
-    // Contrôle si un tournoi a été sélectionné après un clic sur le bouton "C'est parti" et supprime le message d'erreur si vrai
+    // Suppression du message d'erreur si un tournoi vient d'être sélectionné
     for(var i = 1; i <= radios.length; i++){
       document.getElementById(`location${i}`).onchange = function () {
         for(var i = 0; i < radios.length; i++){
@@ -449,6 +413,7 @@ function initialisation() {
   }
   controleFormulaire();
 
+  // Fonction d'injection dans le localstorage des valeurs saisies dans le formulaire
   function localStorageFormulaire() {
     const firstName = document.getElementById('first').value;
     const lastName = document.getElementById('last').value;
@@ -498,51 +463,20 @@ function initialisation() {
 
     if (firstName!= "" && lastName != "" && Email != "" && dateNaissance != "" && nombreTournois != "" && valeur != "" && conditionsUtilisation.checked) {
     
-      const Donneesformulaire = document.querySelectorAll('.formData');
+    // Création du nouveau content de la class ".content" pour afficher le message de confirmation d'inscription 
+    let merciPourVotreInscription = '';
 
-      for(i=0; i<Donneesformulaire.length; i++) {
-        if (Donneesformulaire[i] != "") {
-          Donneesformulaire[i].remove();
-        }
-      }
-      document.querySelector('.text-label').remove();
-      document.querySelector('#nombretournoisMessageErreur').remove();
-      
-      document.querySelector('.btn-submit').remove();
+    merciPourVotreInscription += `<span class="fermerCroix"></span>`
+    merciPourVotreInscription += `<div class="modal-body">`
+    merciPourVotreInscription += `<div class="merciInscription">`
+    merciPourVotreInscription += `<h2>Merci pour</h2>`
+    merciPourVotreInscription += `<h2>votre inscription</h2>`
+    merciPourVotreInscription += `</div>`
+    merciPourVotreInscription += `<input type="submit" class="fermer" value="Fermer">`
+    merciPourVotreInscription += `</div>`
 
-      ajoutTexte()
-
-      localStorage.removeItem("formulaire");
-    }
-  }
-
-  function ajoutTexte() {
-    // Création d'un nouvel élément div class="merciInscription"
-    var inscription = document.createElement("div");
-    inscription.className = 'merciInscription';
-
-    // Injection du nouvel élément créé dans le DOM comme premier enfant de la class ".modal-body"
-    var divModal = document.querySelector('.modal-body');
-    divModal.prepend(inscription);
-
-    // Création d'une description composée de deux h2 pour le nouvel élément 
-    let descriptionInscription = '';
-    descriptionInscription += `<h2>Merci pour</h2>`;
-    descriptionInscription += `<h2>votre inscription</h2>`;
-
-    // Injection de la description dans le DOM 
-    document.querySelector('.merciInscription').innerHTML = descriptionInscription;
-
-    // Changement de valeur et de nom pour le bouton .btn-submit
-    var parent = document.querySelector('.modal-body');
-    var Fermer = document.createElement("input");
-    Fermer.setAttribute("type", "submit");
-    Fermer.setAttribute("class", "fermer");
-    Fermer.setAttribute("value", "Fermer");
-    parent.appendChild(Fermer);
-
-    // Changement de valeur et de nom pour le bouton .close
-    document.querySelector('.close').className = 'fermerCroix';
+    // Injection du nouveau code html dans le DOM
+    document.querySelector('.content').innerHTML = merciPourVotreInscription;
 
     const modalFermer = document.querySelector(".fermer");
     const modalFermerCroix = document.querySelector(".fermerCroix");
@@ -552,7 +486,9 @@ function initialisation() {
 
     // Fonction fermeture du message de confirmation
     function fermetureConfirmation() {
+      // Masquage du formulaire
       modalbg.style.display = "none";
+      // Réinitialisation du formulaire
       initialisation()
     }
 
@@ -561,11 +497,15 @@ function initialisation() {
 
     // Fonction fermeture du message de confirmation
     function fermetureCroixConfirmation() {
+      // Masquage du formulaire
       modalbg.style.display = "none";
+      // Réinitialisation du formulaire
       initialisation()
     }
-  }
 
+      localStorage.removeItem("formulaire");
+    }
+  }
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 }
 
