@@ -196,13 +196,6 @@ function initialisation() {
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
   // Contrôle des valeurs saisies dans les champs prénom, nom, E-mail, date de naissance, nombre de tournois via regex
   function controleFormulaire() {
-    // Contrôle que le champ "Prénom" n'est pas vide
-    if (document.getElementById('first').value == "") {
-      document.querySelector("#firstMessageErreur").innerHTML = "Veuillez renseigner un prénom valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
-      // Contour de couleur rouge du champ "Prénom"
-      document.getElementById('first').style.border="2px solid #e54858";
-    }
-
     // Contrôle du champ "Prénom" en vérifiant qu'il ne comporte que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères
     document.getElementById('first').onchange = function prenom() {
       const firstName = document.getElementById('first').value;
@@ -224,13 +217,6 @@ function initialisation() {
       }
     }
 
-
-    // Contrôle que le champ "Nom" n'est pas vide
-    if (document.getElementById('last').value == "") {
-      document.querySelector("#lastMessageErreur").innerHTML = "Veuillez renseigner un nom valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
-      // Contour de couleur rouge du champ "Nom"
-      document.getElementById('last').style.border="2px solid #e54858";
-    }
     // Contrôle du champ "Nom" en vérifiant qu'il ne comporte que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères
     document.getElementById('last').onchange = function nom() {
       const lastName = document.getElementById('last').value;
@@ -252,12 +238,6 @@ function initialisation() {
       }
     }
 
-    // Contrôle que le champ "E-mail" n'est pas vide
-    if (document.getElementById('email').value == "") {
-      document.querySelector("#emailMessageErreur").innerHTML = "Veuillez renseigner qu'un E-mail valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
-      // Contour de couleur rouge du champ "E-mail"
-      document.getElementById('email').style.border="2px solid #e54858";
-    }
     // Contrôle du champ E-mail
     document.getElementById('email').onchange = function email() {
       const Email = document.getElementById('email').value;
@@ -279,12 +259,6 @@ function initialisation() {
       }
     }
 
-    // Contrôle que le champ "Date de naissance" n'est pas vide
-    if (document.getElementById('birthdate').value == "") {
-      document.querySelector("#naissanceMessageErreur").innerHTML = "Veuillez renseigner une date de naissance valide (respectant le format jj/mm/aaaa).";
-      // Contour de couleur rouge du champ "Date de naissance"
-      document.getElementById('birthdate').style.border="2px solid #e54858";
-    }
     // Contrôle du champ "Date de naissance"
     document.getElementById('birthdate').onchange = function naissance() {
       const dateNaissance = document.getElementById('birthdate').value;
@@ -306,13 +280,7 @@ function initialisation() {
       }
     }
 
-    // Contrôle que le champ "À combien de tournois GameOn avez-vous déjà participé ?" n'est pas vide
-    if (document.getElementById('quantity').value == "") {
-      document.querySelector("#nombretournoisMessageErreur").innerHTML = "Veuillez saisir une valeur comprise entre 0 inclus et 99 inclus.";
-      // Coutour de couleur rouge du champ "À combien de tournois GameOn avez-vous déjà participé ?"
-      document.getElementById('quantity').style.border="2px solid #e54858";
-    }
-    // Contrôle du champ "À combien de tournois GameOn avez-vous déjà participé ?"
+    // Contrôle du champ "À combien de tournois GameOn avez-vous déjà participé ?" est
     document.getElementById('quantity').onchange = function nombretournois() {
       const nombreTournois = document.getElementById('quantity').value;
       if (/^[1-9]{0,1}[0-9]$/.test(nombreTournois)) {
@@ -335,20 +303,8 @@ function initialisation() {
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-    // Contrôle si un tournoi a été sélectionné à l'ouverture du formulaire
-    var radios = document.getElementsByName('location');
-    for(var i = 0; i < radios.length; i++){
-      // Si un tournoi est déjà sélectionné on masque le message d'erreur
-      if(radios[i].checked){
-      valeur = radios[i].value;
-      document.querySelector("#tournoisMessageErreur").innerHTML = "";
-      // Si aucun tournoi n'a été sélectionné on affiche le message d'erreur ci-dessous
-      }else if(valeur == "") {
-        document.querySelector("#tournoisMessageErreur").innerHTML = "Veuillez sélectionner un tournoi parmis ceux proposés ci-dessus.";
-      }
-    }
-
     // Suppression du message d'erreur si un tournoi vient d'être sélectionné
+    var radios = document.getElementsByName('location');
     for(var i = 1; i <= radios.length; i++){
       document.getElementById(`location${i}`).onchange = function () {
         for(var i = 0; i < radios.length; i++){
@@ -362,19 +318,8 @@ function initialisation() {
       }
     }
 
-    // Contrôle si la case "J'ai lu et accepté les conditions d'utilisation." est cochée
+    // Si la case "J'ai lu et accepté les conditions d'utilisation." est décochée alors on affiche le message d'erreur sinon on l'efface
     const conditionsUtilisation = document.getElementById('checkbox1');
-    // Si la case "J'ai lu et accepté les conditions d'utilisation." n'est pas cochée alors on affiche le message d'erreur
-    if (!conditionsUtilisation.checked) {
-      document.querySelector("#conditionsMessageErreur").innerHTML = "Veuillez cocher la case 'J'ai lu et accepté les conditions d'utilisation.'";
-      document.getElementById('checkbox1').checked = false;
-      localStorageFormulaire();
-    }
-    else {
-      document.getElementById('checkbox1').checked = true;
-      localStorageFormulaire();
-    }
-      // Si la case "J'ai lu et accepté les conditions d'utilisation." est décochée alors on affiche le message d'erreur sinon on l'efface
     document.getElementById('checkbox1').onchange = function () {
       if (!conditionsUtilisation.checked) {
         document.querySelector("#conditionsMessageErreur").innerHTML = "Veuillez cocher la case 'J'ai lu et accepté les conditions d'utilisation.'";
@@ -461,8 +406,68 @@ function initialisation() {
     const nombreTournois = document.getElementById('quantity').value;
     const conditionsUtilisation = document.getElementById('checkbox1');
 
+    // Contrôle que le champ "Prénom" n'est pas vide
+    if (document.getElementById('first').value == "") {
+      document.querySelector("#firstMessageErreur").innerHTML = "Veuillez renseigner un prénom valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
+      // Contour de couleur rouge du champ "Prénom"
+      document.getElementById('first').style.border="2px solid #e54858";
+    }
+
+    // Contrôle que le champ "Nom" n'est pas vide
+    if (document.getElementById('last').value == "") {
+      document.querySelector("#lastMessageErreur").innerHTML = "Veuillez renseigner un nom valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
+      // Contour de couleur rouge du champ "Nom"
+      document.getElementById('last').style.border="2px solid #e54858";
+    }
+
+    // Contrôle que le champ "E-mail" n'est pas vide
+    if (document.getElementById('email').value == "") {
+      document.querySelector("#emailMessageErreur").innerHTML = "Veuillez renseigner qu'un E-mail valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
+      // Contour de couleur rouge du champ "E-mail"
+      document.getElementById('email').style.border="2px solid #e54858";
+    }
+
+    // Contrôle que le champ "Date de naissance" n'est pas vide
+    if (document.getElementById('birthdate').value == "") {
+      document.querySelector("#naissanceMessageErreur").innerHTML = "Veuillez renseigner une date de naissance valide (respectant le format jj/mm/aaaa).";
+      // Contour de couleur rouge du champ "Date de naissance"
+      document.getElementById('birthdate').style.border="2px solid #e54858";
+    }
+
+    // Contrôle que le champ "À combien de tournois GameOn avez-vous déjà participé ?" n'est pas vide
+    if (document.getElementById('quantity').value == "") {
+      document.querySelector("#nombretournoisMessageErreur").innerHTML = "Veuillez saisir une valeur comprise entre 0 inclus et 99 inclus.";
+      // Coutour de couleur rouge du champ "À combien de tournois GameOn avez-vous déjà participé ?"
+      document.getElementById('quantity').style.border="2px solid #e54858";
+    }
+
+    // Contrôle si un tournoi a été sélectionné à l'ouverture du formulaire
+    var radios = document.getElementsByName('location');
+    for(var i = 0; i < radios.length; i++){
+      // Si un tournoi est déjà sélectionné on masque le message d'erreur
+      if(radios[i].checked){
+      valeur = radios[i].value;
+      document.querySelector("#tournoisMessageErreur").innerHTML = "";
+      // Si aucun tournoi n'a été sélectionné on affiche le message d'erreur ci-dessous
+      }else if(valeur == "") {
+        document.querySelector("#tournoisMessageErreur").innerHTML = "Veuillez sélectionner un tournoi parmis ceux proposés ci-dessus.";
+      }
+    }
+
+    // Contrôle si la case "J'ai lu et accepté les conditions d'utilisation." est cochée
+    // Si la case "J'ai lu et accepté les conditions d'utilisation." n'est pas cochée alors on affiche le message d'erreur
+    if (!conditionsUtilisation.checked) {
+      document.querySelector("#conditionsMessageErreur").innerHTML = "Veuillez cocher la case 'J'ai lu et accepté les conditions d'utilisation.'";
+      document.getElementById('checkbox1').checked = false;
+      localStorageFormulaire();
+    }
+    else {
+      document.getElementById('checkbox1').checked = true;
+      localStorageFormulaire();
+    }
+
     if (firstName!= "" && lastName != "" && Email != "" && dateNaissance != "" && nombreTournois != "" && valeur != "" && conditionsUtilisation.checked) {
-    
+
       // Création du nouveau content de la class ".content" pour afficher le message de confirmation d'inscription 
       let merciPourVotreInscription = '';
 
