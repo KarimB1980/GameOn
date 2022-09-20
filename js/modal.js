@@ -468,7 +468,7 @@ function initialisation() {
 
     if (firstName!= "" && lastName != "" && Email != "" && dateNaissance != "" && nombreTournois != "" && valeur != "" && conditionsUtilisation.checked) {
 
-      // Création du nouveau content de la class ".content" pour afficher le message de confirmation d'inscription 
+      // Création du nouveau contenu de la class ".content" pour afficher le message de confirmation d'inscription
       let merciPourVotreInscription = '';
 
       merciPourVotreInscription += `<span class="fermerCroix"></span>`
