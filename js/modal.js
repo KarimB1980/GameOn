@@ -209,7 +209,7 @@ function initialisation() {
 
       } else {
         // Effacement de la valeur fausse
-        document.getElementById('first').value = "";
+        //document.getElementById('first').value = "";
         // Contour de couleur rouge du champ "Prénom"
         document.getElementById('first').style.border="2px solid #e54858";
         // Affichage du message d'erreur sous le champ "Prénom"
@@ -230,7 +230,7 @@ function initialisation() {
 
       } else {
         // Effacement de la valeur fausse
-        document.getElementById('last').value = "";
+        //document.getElementById('last').value = "";
         // Contour de couleur rouge du champ "Nom"
         document.getElementById('last').style.border="2px solid #e54858";
         // Affichage du message d'erreur sous le champ "Nom"
@@ -251,7 +251,7 @@ function initialisation() {
 
       } else {
         // Effacement de la valeur fausse
-        document.getElementById('email').value = "";
+        //document.getElementById('email').value = "";
         // Contour de couleur rouge du champ "E-mail"
         document.getElementById('email').style.border="2px solid #e54858";
         // Affichage du message d'erreur sous le champ "E-mail"
@@ -272,7 +272,7 @@ function initialisation() {
 
       } else {
         // Effacement de la valeur fausse
-        document.getElementById('birthdate').value = "";
+        //document.getElementById('birthdate').value = "";
         // Contour de couleur rouge du champ "Date de naissance"
         document.getElementById('birthdate').style.border="2px solid #e54858";
         // Affichage du message d'erreur sous le champ "Date de naissance"
@@ -293,7 +293,7 @@ function initialisation() {
 
       } else {
         // Effacement de la valeur fausse
-        document.getElementById('quantity').value = "";
+        //document.getElementById('quantity').value = "";
         // Coutour de couleur rouge du champ "À combien de tournois GameOn avez-vous déjà participé ?"
         document.getElementById('quantity').style.border="2px solid #e54858";
         // Affichage du message d'erreur sous le champ "À combien de tournois GameOn avez-vous déjà participé ?"
@@ -312,9 +312,19 @@ function initialisation() {
           valeur = radios[i].value;
 
           document.querySelector("#tournoisMessageErreur").innerHTML = "";
+          
           }
         }  
         localStorageFormulaire();
+      }
+    }
+    var radios = document.getElementsByName('location');
+    for(var i = 0; i < radios.length; i++){
+      // Si un tournoi est déjà sélectionné on masque le message d'erreur
+      if(radios[i].checked){
+      valeur = radios[i].value;
+      document.querySelector("#tournoisMessageErreur").innerHTML = "";
+      // Si aucun tournoi n'a été sélectionné on affiche le message d'erreur ci-dessous
       }
     }
 
@@ -412,6 +422,21 @@ function initialisation() {
       // Contour de couleur rouge du champ "Prénom"
       document.getElementById('first').style.border="2px solid #e54858";
     }
+    if (/^[a-zA-Z \-]{2,100}$/.test(firstName)) {
+      // Masquage du coutour de couleur rouge du champ "Prénom"
+      document.getElementById('first').style.border="0px solid #e54858";
+      // Effacement du message d'erreur
+      document.querySelector("#firstMessageErreur").innerHTML = "";
+      localStorageFormulaire();
+    } else {
+      // Effacement de la valeur fausse
+      //document.getElementById('first').value = "";
+      // Contour de couleur rouge du champ "Prénom"
+      document.getElementById('first').style.border="2px solid #e54858";
+      // Affichage du message d'erreur sous le champ "Prénom"
+      document.querySelector("#firstMessageErreur").innerHTML = "Veuillez renseigner un prénom valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
+    }
+
 
     // Contrôle que le champ "Nom" n'est pas vide
     if (document.getElementById('last').value == "") {
@@ -419,6 +444,21 @@ function initialisation() {
       // Contour de couleur rouge du champ "Nom"
       document.getElementById('last').style.border="2px solid #e54858";
     }
+    if (/^[a-zA-Z \-]{2,100}$/.test(lastName)) {
+      // Masquage du coutour de couleur rouge du champ "Nom"
+      document.getElementById('last').style.border="0px solid #e54858";
+      // Effacement du message d'erreur
+      document.querySelector("#lastMessageErreur").innerHTML = "";
+      localStorageFormulaire();
+    } else {
+      // Effacement de la valeur fausse
+      //document.getElementById('last').value = "";
+      // Contour de couleur rouge du champ "Nom"
+      document.getElementById('last').style.border="2px solid #e54858";
+      // Affichage du message d'erreur sous le champ "Nom"
+      document.querySelector("#lastMessageErreur").innerHTML = "Veuillez renseigner qu'un E-mail valide (ne comportant que des minuscules, majuscules, tirets, espaces et 2 à 100 caractères maximum).";
+    }
+
 
     // Contrôle que le champ "E-mail" n'est pas vide
     if (document.getElementById('email').value == "") {
@@ -426,6 +466,21 @@ function initialisation() {
       // Contour de couleur rouge du champ "E-mail"
       document.getElementById('email').style.border="2px solid #e54858";
     }
+    if (/^[\w\.]+@([\w]+\.)+[\w]{2,4}$/.test(Email)) {
+      // Masquage du coutour de couleur rouge du champ "E-mail"
+      document.getElementById('email').style.border="0px solid #e54858";
+      // Effacement du message d'erreur
+      document.querySelector("#emailMessageErreur").innerHTML = "";
+      localStorageFormulaire();
+    } else {
+      // Effacement de la valeur fausse
+      //document.getElementById('email').value = "";
+      // Contour de couleur rouge du champ "E-mail"
+      document.getElementById('email').style.border="2px solid #e54858";
+      // Affichage du message d'erreur sous le champ "E-mail"
+      document.querySelector("#emailMessageErreur").innerHTML = "Veuillez renseigner un email valide (respectant le format xxxx@xxx.xxx avec une terminaison de 2 à 4 caractères).";
+    }
+
 
     // Contrôle que le champ "Date de naissance" n'est pas vide
     if (document.getElementById('birthdate').value == "") {
@@ -433,12 +488,40 @@ function initialisation() {
       // Contour de couleur rouge du champ "Date de naissance"
       document.getElementById('birthdate').style.border="2px solid #e54858";
     }
+    if (/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/.test(dateNaissance)) {
+      // Masquage du coutour de couleur rouge du champ "Date de naissance"
+      document.getElementById('birthdate').style.border="0px solid #e54858";
+      // Effacement du message d'erreur
+      document.querySelector("#naissanceMessageErreur").innerHTML = "";
+      localStorageFormulaire();
+    } else {
+      // Effacement de la valeur fausse
+      //document.getElementById('birthdate').value = "";
+      // Contour de couleur rouge du champ "Date de naissance"
+      document.getElementById('birthdate').style.border="2px solid #e54858";
+      // Affichage du message d'erreur sous le champ "Date de naissance"
+      document.querySelector("#naissanceMessageErreur").innerHTML = "Veuillez renseigner une date de naissance valide (respectant le format jj/mm/aaaa).";
+    }
 
     // Contrôle que le champ "À combien de tournois GameOn avez-vous déjà participé ?" n'est pas vide
     if (document.getElementById('quantity').value == "") {
       document.querySelector("#nombretournoisMessageErreur").innerHTML = "Veuillez saisir une valeur comprise entre 0 inclus et 99 inclus.";
       // Coutour de couleur rouge du champ "À combien de tournois GameOn avez-vous déjà participé ?"
       document.getElementById('quantity').style.border="2px solid #e54858";
+    }
+    if (/^[1-9]{0,1}[0-9]$/.test(nombreTournois)) {
+      // Masquage du coutour de couleur rouge du champ "À combien de tournois GameOn avez-vous déjà participé ?"
+      document.getElementById('quantity').style.border="0px solid #e54858";
+      // Effacement du message d'erreur
+      document.querySelector("#nombretournoisMessageErreur").innerHTML = "";
+      localStorageFormulaire();
+    } else {
+      // Effacement de la valeur fausse
+      //document.getElementById('quantity').value = "";
+      // Coutour de couleur rouge du champ "À combien de tournois GameOn avez-vous déjà participé ?"
+      document.getElementById('quantity').style.border="2px solid #e54858";
+      // Affichage du message d'erreur sous le champ "À combien de tournois GameOn avez-vous déjà participé ?"
+      document.querySelector("#nombretournoisMessageErreur").innerHTML = "Veuillez saisir une valeur comprise entre 0 inclus et 99 inclus.";
     }
 
     // Contrôle si un tournoi a été sélectionné à l'ouverture du formulaire
@@ -466,7 +549,9 @@ function initialisation() {
       localStorageFormulaire();
     }
 
-    if (firstName!= "" && lastName != "" && Email != "" && dateNaissance != "" && nombreTournois != "" && valeur != "" && conditionsUtilisation.checked) {
+    //if (firstName!= "" && lastName != "" && Email != "" && dateNaissance != "" && nombreTournois != "" && valeur != "" && conditionsUtilisation.checked) {
+    //if (document.getElementById('last').style.border=="0px solid #e54858" && document.getElementById('first').style.border=="0px solid #e54858" && document.getElementById('email').style.border=="0px solid #e54858" && document.getElementById('birthdate').style.border=="0px solid #e54858" && document.getElementById('quantity').style.border=="0px solid #e54858" && valeur != "" && conditionsUtilisation.checked) {
+    if (document.querySelector("#firstMessageErreur").innerText == "" && document.querySelector("#lastMessageErreur").innerText == "" && document.querySelector("#emailMessageErreur").innerText == "" && document.querySelector("#naissanceMessageErreur").innerText == "" && document.querySelector("#nombretournoisMessageErreur").innerText == "" && valeur != "" && conditionsUtilisation.checked) {
 
       // Création du nouveau contenu de la class ".content" pour afficher le message de confirmation d'inscription
       let merciPourVotreInscription = '';
